@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
+<head>
+	<title>Chesapeak</title>
+	<meta title ="Chesapeak Music Home Site">
+	<meta charset="UTF-8"> 
+	<meta name="description" content="Chesapeak Music East Coast Hip-Hop Community">
+	<meta name="keywords" content="Chesapeak,East,Coast,hiphop,hip,hop,music,PorterBay,porter,bay,rap,art">
+	<meta name="author" content="Jeremy Harman">
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Oswald|Indie+Flower|Rock+Salt|Bungee+Shade|Permanent+Marker" rel="stylesheet" type="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel=icon href="media/LOGO.webp">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+   <style>
+		html {
+			background: url("media/inner_back.png") no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			height: 100%;
+			width: 100%;
+        }
+        
+		header {
+			text-align:center;
+			font-size:xx-large;
+			color:white;
+		 }
+        a {
+			text-decoration: none; /* no underline */
+			color: #278cc6;
+        }
+		.background {
+			float:left;
+		}
+		.logo {
+			-webkit-transform: translateY(400%);
+			  -ms-transform: translateY(400%);
+			   transform: translateY(400%);
+		}
+		.topbody {
+			float:left;
+			position:relative;
+			width:100%;
+			height:100%;
+		}
+		.leftbody {
+			color: #278cc6;
+			font-size:x-large;
+			text-align: center;
+			float:left;
+			left:0%;
+			position:relative;
+			width: 100%;
+			height: 25%;
+		}
+		.bottombody {
+			font-size:x-large;
+			text-align: center;
+			position:relative;
+			width: 100%;
+			height:100%;
+			font-family: 'Rock Salt', cursive;
+		}
+		.chspkpics {
+			color:white;
+		}
+		.porterbaymusic {
+			font-family: 'Permanent Marker', cursive;
+		}
+		.vincimusic {
+			font-family: 'Bungee Shade', cursive;
+		}
+        .footerholder {
+			bottom: 0;
+			position: fixed;
+			text-align: center;
+			height: 10%;
+			width: 100%;
+			float:left;
+		}
+		.footer {
+			color:white;
+			bottom: 0;
+			position: fixed;
+			text-align: center;
+			width: 100%;
+			font-size:small;
+			font-family: 'Indie Flower', cursive;
+		}
+	</style>
+	
+	<script>
+		var screenWidth = screen.width;
+		var screenHeight = screen.height;
+		var screenWidth_lesser = screenWidth;
+		var shirtWidth_one = 250;
+		var shirtHeight_one = 250;
+		var picHeight_two = 1100;
+		var music_width = screen.width * .75;
+		var music_height = screen.height / 2.2;
+		var logoWidth_one = screen.width * .70;
+		var logoHeight_one = screen.height / 2.5;
+		var social_image_size = 30;
+		var date = new Date();
+		var year = date.getFullYear();
+		
+		window.onload = function() {
+		   //when the document is finished loading, replace everything
+		   //between the <a ...> </a> tags with the value of splitText
+		   //makeRequest('pic.php');
+		   document.getElementById("yearText").innerHTML=year;
+		} 
+		
+		function yellowText(source) {
+			if (source.id == "chesapeakpics") {
+				document.getElementById("chesapeakpics").style.color = "white";
+			}
+			if (source.id == "chesapeakbio") {
+				document.getElementById("chesapeakbio").style.color = "white";
+			}
+		}
+		
+		function aquaText(source) {
+			if (source.id == "chesapeakpics") {
+				document.getElementById("chesapeakpics").style.color = "#278cc6";
+			}
+			if (source.id == "chesapeakbio") {
+				document.getElementById("chesapeakbio").style.color = "#278cc6";
+			}
+		}
+		
+		function makeRequest(_url) {
+			alert("asdf");
+			$.ajax({
+				type: "POST",
+				url: _url,
+				data: { directory: "media/gallery/" }
+			}).done(function(msg) { 
+				$result = JSON.parse(msg);
+				for (i = 0; i < $result.length; i++)
+				{
+					$(".rightbody").append($result[i] + "/>");
+					$(".rightbody").append("<br/><br/>");
+				}
+			});
+		}
+
+		function changeImage(image) {
+			image.src = "/media/chesapeak_logo.jpg";
+		}
+		
+		function changeBack(image) {
+			image.src = "/media/chesapeak_blacc.jpg";
+		}
+	</script>
+</head>
+  <header>
+	<div>
+		<!-- top of page -->
+	</div>
+  </header>
+	<body>
+		<div class="leftbody">
+			</br>
+			<div class="porterbaymusic" id="porterbaymusic" >
+				<iframe id='PorterBayPalisades' width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/299097136&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+				<p>Porter Bay</p>
+				<br />
+			</div>
+			<div class="vincimusic" id="vincimusic">
+				<iframe id='VinciYouWereAllTooSoon' width="100%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/297984063&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+				<p>Vinci</p>
+				<br/>
+			</div>
+		</div>
+		<div class="bottombody">
+			<a  class="chspkpics" id="chesapeakpics" onmouseover='yellowText(this)' onmouseout='aquaText(this)' href="/Flicks.html">See Pics</a>
+			<br /><br/><br/>
+		</div>
+		<div class="footerholder">
+			<div class="footer">
+				<b> &copy; <a id="yearText" onmouseover='yellowText()' onmouseout='aquaText()'>year</a> - Chesapeak Music</b>
+			</div>
+		</div>
+	</body>
+</html>

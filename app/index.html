@@ -4,33 +4,241 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
+	<title>Chesapeak</title>
+	<meta title ="Chesapeak Music Home Site">
+	<meta charset="UTF-8">
+	<meta name="description" content="Chesapeak Music Hip-Hop">
+	<meta name="keywords" content="Chesapeak,East,Coast,hiphop,hip,hop,music,PorterBay,porter,bay,rap,art,vinci">
+	<meta name="author" content="Jeremy Harman">
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Oswald|Indie+Flower|Rock+Salt" rel="stylesheet" type="text/css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel=icon href="media/LOGO.webp">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+	<!--full_background.jpg below -->
+  <style>
+		html {
+			background: url("media/litty3.png") no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			height: 100%;
+			width: 100%;
+			
+			font-family: 'Indie Flower', cursive;
+			font-size: 20px;
+		}
+		body {
+		
+		}
+		.message {
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			text-align: center;
+			
+			-webkit-transform: translateY(14%);
+			  -ms-transform: translateY(14%);
+			   transform: translateY(14%);
+			  
+			-webkit-animation: fadein 4s;
+			   -moz-animation: fadein 4s;
+				-ms-animation: fadein 4s; 
+				 -o-animation: fadein 4s; 
+					animation: fadein 4s;
+		}
+		.lowerbody {
+		   float: left;
+		   position: absolute;
+		   padding: 5px;
+		   height: 100%;
+		   width: 100%;
+		   text-align: center;
+		
+			-webkit-transform: translateY(10%);
+			  -ms-transform: translateY(10%);
+			   transform: translateY(10%);
+		}
+		a {
+			color: #3B92AB;
+			text-decoration: none; /* no underline */
+			cursor: pointer;
+		}
+		chesapeakmusic {
+			text-decoration: underline;
+		}
+		.footerholder {
+			bottom: 0;
+			position: fixed;
+			text-align: center;
+			height: 10%;
+			width: 100%;
+		}
+		.footer {
+			float:left;
+			color:white;
+			bottom: 0;
+			position: fixed;
+			text-align: center;
+			width: 100%;
+			font-size:small;
+		}
+		
+		@keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		@-moz-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		@-webkit-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		@-ms-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		@-o-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+<!--
+		video::-internal-media-controls-download-button {
+			display:none;
+		}
+		video::-webkit-media-controls-enclosure {
+			overflow:hidden;
+		}
+		video::-webkit-media-controls-panel {
+			width: calc(100% + 30px); /* Adjust as needed */
+		}
+-->
+	</style>
+	
+	<script type="text/javascript">
+		var screen_width = screen.width;
+		var screen_height = screen.height;
+		var logo_width = screen_width * 0.78;
+		var logo_height = screen_height / 2.25;
+		var date = new Date();
+		var year = date.getFullYear();
+	    var vidpath = "";
+		var loaded = 0;
+	
+		window.onload = function() {
+			if (screen.width <= 800) {
+				window.location = "http://m.chesapeakmusic.com";
+			}
+		   document.getElementById("yearText").innerHTML=year;
+			var httpRequest;
+			
+			displayVideo();
+			
+			function displayVideo() {
+				//var videoHTML = "<video class='porterbaymusicvideo' controls autoplay id='porterbayvideo' width='960' height='540' name='PorterBay Music Video' src='http://localhost:8000/media/trailer.mov'></video>";
+				var videoHTML = "<iframe width='765' height='425' src='https://www.youtube.com/embed/LJKBCwy7Gds' frameborder='0' allowfullscreen></iframe>";
+				//var res = str.replace("Microsoft", "W3Schools");
+				
+				document.getElementById("newporterbay").innerHTML = videoHTML;
+				
+				
+				//document.getElementById("newporterbay").onclick = function() {
+					// document.getElementById("porterbayvideo").paused?this.play():this.pause();
+				//};
+			}
+
+			function makeRequest(url, userName) {
+				httpRequest = new XMLHttpRequest();
+				if (!httpRequest) {
+					alert("failed, cannot create XmlHttp instance");
+					return false;
+				}
+
+				httpRequest.onreadystatechange = alertContents;
+				httpRequest.open('POST', url);
+				httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				httpRequest.send('userName=' + encodeURIComponent(userName));
+			}
+
+			function alertContents() {
+				 if (httpRequest.readyState === XMLHttpRequest.DONE) {
+					if (httpRequest.status == 200) {
+						var response = JSON.parse(httpRequest.responseText);
+						alert(response.computedString); // get computedString element from json dictionary
+
+						/* get the content of root node in xml file 
+						var xmldoc = httpRequest.responseXML;
+						var root_node = xmldoc.getElementsByTagName('root').item(0);
+						alert(root_node.firstChild.data);
+						*/
+					} else {
+						alert("There was a problem with the request. " + httpRequest.status);
+					}
+				}
+			}
+
+		} 
+		
+		function yellowText() {
+			document.getElementById("chesapeakmusic").style.color = "white";
+			document.getElementById("enterchesapeakmusic").style.color = "white";
+		}
+		
+		function aquaText() {
+			document.getElementById("chesapeakmusic").style.color = "#3B92AB";
+			document.getElementById("enterchesapeakmusic").style.color = "#3B92AB";
+		}
+		
+		function changeImage(image) {
+			image.src = "/media/chesapeak_logo.jpg";
+		}
+		
+		function changeBack(image) {
+			image.src = "/media/chesapeak_blacc.jpg";
+		}
+
+	</script>
+	
+  </head>
 <body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
-
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
-  <!-- In production use:
+    <div class="message">
+		<!--
+		<label>Your name: 
+			<input type="text" id="ajaxTextbox" />
+		</label>
+		-->
+		<b>
+			<a id="newporterbay"><img onmouseover='yellowText()' onmouseout='aquaText()' border="0" alt="media" src="/media/gif_150_delay.gif" /></a>
+			
+			<!--
+			<video class='porterbaymusicvideo' controls='none' id='porterbayvideo' width='960' height='540' name='PorterBay Music Video' src='http://localhost:8000/media/trailer.mov'></video>
+			-->
+		</b>
+		<div class="lowerbody">
+			<b>
+				<a id="chesapeakmusic" href='/Home.html' onmouseover='yellowText()' onmouseout='aquaText()''>Click here to leave the matrix</a>
+			</b>
+		</div>
+	</div>
+	<div class="footerholder">
+	
+	</div>
+	<div class="footer">
+		<b> &copy; <a id="yearText" onmouseover='yellowText()' onmouseout='aquaText()'>year</a> - Chesapeak Music</b>
+	</div>
+		
+  <!-- In production use: -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
@@ -41,3 +249,4 @@
   <script src="components/version/interpolate-filter.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8"> 
+	<meta name="description" content="Chesapeak Music East Coast Hip-Hop Community">
+	<meta name="keywords" content="Chesapeak,East,Coast,hiphop,hip,hop,music,PorterBay,porter,bay,rap,art">
+	<meta name="author" content="Jeremy Harman">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel=icon href="media/LOGO.webp">
+	 <link rel=icon href="media/LOGO.webp">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+	
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>SoundCloud API Web Player Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css" />
+    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
+    <script src="waveformImage.js"></script>
+    <script src="player.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Oswald|Indie+Flower|Rock+Salt|Bungee+Shade|Permanent+Marker" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" />
+
+   <style>
+		html {
+			background: url("media/inner_back.png") no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			height: 100%;
+			width: 100%;
+        }
+		header {
+			text-align:center;
+			font-size:xx-large;
+			color:white;
+		}
+        a {
+			text-decoration: none; /* no underline */
+			color:white;
+			font-family: 'Permanent Marker', cursive;
+        }
+		.background {
+			float:left;
+		}
+		.title {
+			text-align: center;
+			font-family: 'Indie Flower', cursive;
+			font-size: 22px;
+		}
+		.trackselection, .vincitrackselection {
+			background-color:#3B92AB;
+			height:110px;
+			overflow-x: scroll;
+			overflow-y: hidden;
+			-webkit-overflow-scrolling: touch;
+		}
+		ul {
+			white-space:nowrap;
+		}
+		li { 
+			width: 200px;
+			display: inline-block;
+		}
+		body {
+			font-family: 'Raleway', sans-serif;
+			color:white;
+		}
+		.bottombody {
+			color: #278cc6;
+			font-size:x-large;
+			text-align: center;
+			position:relative;
+			width: 100%;
+			height:100%;
+		}
+		.footerholder {
+			bottom: 0;
+			position: fixed;
+			text-align: center;
+			height: 10%;
+			width: 100%;
+			float:left;
+		}
+		.footer {
+			color:white;
+			bottom: 0;
+			position: fixed;
+			text-align: center;
+			width: 100%;
+			font-size:small;
+			font-family: 'Indie Flower', cursive;
+		}
+		#SoundCloudPlayer .track_artwork {
+			float:left;
+			margin-right: 6px;
+		}
+
+		#SoundCloudPlayer .track_artist {
+			font-size: small;
+			margin-bottom: 4px;
+		}
+
+		#SoundCloudPlayer .track_title {
+			margin-top: 0px;
+			font-weight: bold;
+		}
+
+		#SoundCloudPlayer .track_control {
+			cursor: pointer;
+			display: none;
+		}
+
+		#SoundCloudPlayer .track_seek_bar .ui-slider-range { background: orange; }
+		#SoundCloudPlayer .track_seek_bar .ui-slider-handle { border-color: orange; }
+
+		#SoundCloudPlayer .track_waveform {
+			width: 100%;
+			height: 80px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+			position: relative;
+		}
+
+		#SoundCloudPlayer .track_waveform img {
+			
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			z-index: 0;
+		}
+
+		#SoundCloudPlayer .track_waveform .wvprogress{
+			height: 100%;
+			position: absolute;
+			opacity: 0.25;
+			background-color: #ed970e;
+			width: 0px;
+			z-index: 1;
+			left: 0;
+			top: 0;
+		}
+	</style>
+	
+	<script>
+		var screenWidth = screen.width;
+		var screenHeight = screen.height;
+		var screenWidth_lesser = screenWidth;
+		var shirtWidth_one = 250;
+		var shirtHeight_one = 250;
+		var picHeight_two = 1100;
+		var music_width = screen.width * .75;
+		var music_height = screen.height / 2.2;
+		var logoWidth_one = screen.width * .70;
+		var logoHeight_one = screen.height / 2.5;
+		var social_image_size = 30;
+		var date = new Date();
+		var year = date.getFullYear();
+		var porterTracks = { "HOV": 275198385, "KeepCookin": 297952817, "Popular": 275198379, "Setbacks": 275198377, "DozinOff": 275198374, "CrystalCity": 275198369,
+								"AllYear": 275198364, "SmoothTalk": 275198353, "Lurkin": 275198359, "IBeenStraight": 229637355, "GangSigns": 269826610, "BlackLights": 257679673,
+								"Rango": 239792973, "SweetLongLife": 236110876, "Tippin": 219139432, "RightNow": 184973790 };
+		
+		var vinciTracks = { "Ca$h": 310581145, "RuffNeck": 309841408, "TakeMe": 309821924, "YouWereAllTooSoon": 297984063, "BobProctor": 296896693, "Drowning": 296895842, "UpInIt": 284019330, "Dolo": 296889335, "NewWaves": 288702187, "Paranoid": 284016890, "ClockWork": 260008194,
+							"Phases": 305184259, "WeLoko": 307917941 };
+		
+		window.onload = function() {
+		   //when the document is finished loading, replace everything
+		   //between the <a ...> </a> tags with the value of splitText
+		   //makeRequest('pic.php');
+		   document.getElementById("yearText").innerHTML=year;
+		   document.getElementById('firstitem').setAttribute('style','visibility:hidden');
+		   document.getElementById('seconditem').setAttribute('style','visibility:hidden');
+		   for (var track in porterTracks) {
+				var toAdd = '<li>' + '<a href="Home.html?trackId=' + porterTracks[track] + '">' + track + '</a>' + '</li>';
+				$('.portertrackset').append(toAdd);
+		   }
+		   for (var track in vinciTracks) {
+				var toAdd = '<li>' + '<a href="Home.html?trackId=' + vinciTracks[track] + '">' + track + '</a>' + '</li>';
+				$('.vincitrackset').append(toAdd);
+		   }
+		} 
+		
+		function yellowText(source) {
+			if (source.id == "chesapeakpics") {
+				document.getElementById("chesapeakpics").style.color = "white";
+			}
+			if (source.id == "chesapeakbio") {
+				document.getElementById("chesapeakbio").style.color = "white";
+			}
+		}
+		
+		function aquaText(source) {
+			if (source.id == "chesapeakpics") {
+				document.getElementById("chesapeakpics").style.color = "#278cc6";
+			}
+			if (source.id == "chesapeakbio") {
+				document.getElementById("chesapeakbio").style.color = "#278cc6";
+			}
+		}
+		
+		function makeRequest(_url) {
+			alert("asdf");
+			$.ajax({
+				type: "POST",
+				url: _url,
+				data: { directory: "media/gallery/" }
+			}).done(function(msg) { 
+				$result = JSON.parse(msg);
+				for (i = 0; i < $result.length; i++)
+				{
+					$(".rightbody").append($result[i] + "/>");
+					$(".rightbody").append("<br/><br/>");
+				}
+			});
+		}
+
+		function changeImage(image) {
+			image.src = "/media/chesapeak_logo.jpg";
+		}
+		
+		function changeBack(image) {
+			image.src = "/media/chesapeak_blacc.jpg";
+		}
+		
+		!function(a){function f(a,b){if(!(a.originalEvent.touches.length>1)){a.preventDefault();var c=a.originalEvent.changedTouches[0],d=document.createEvent("MouseEvents");d.initMouseEvent(b,!0,!0,window,1,c.screenX,c.screenY,c.clientX,c.clientY,!1,!1,!1,!1,0,null),a.target.dispatchEvent(d)}}if(a.support.touch="ontouchend"in document,a.support.touch){var e,b=a.ui.mouse.prototype,c=b._mouseInit,d=b._mouseDestroy;b._touchStart=function(a){var b=this;!e&&b._mouseCapture(a.originalEvent.changedTouches[0])&&(e=!0,b._touchMoved=!1,f(a,"mouseover"),f(a,"mousemove"),f(a,"mousedown"))},b._touchMove=function(a){e&&(this._touchMoved=!0,f(a,"mousemove"))},b._touchEnd=function(a){e&&(f(a,"mouseup"),f(a,"mouseout"),this._touchMoved||f(a,"click"),e=!1)},b._mouseInit=function(){var b=this;b.element.bind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),c.call(b)},b._mouseDestroy=function(){var b=this;b.element.unbind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),d.call(b)}}}(jQuery);
+
+		function WaveForm(waveformPngUrl) {
+
+			$('.track_waveform').append("<img src=\""+waveformPngUrl+"\" />");
+			$('.track_waveform').append("<div class='wvprogress'></div>")
+
+			this.setProgress = function (newProgress) {
+
+				var width = $('.track_waveform').width();
+				var progressPoint =  width - ((1 - newProgress) * width);
+				$('.wvprogress').css({ width: "" + progressPoint + "px" });
+
+			}
+		}
+
+		var player, mTrack, audio, seekBarInterval, waveForm;
+		var updatingSeekBar = false;
+		var clientId = 'cUa40O3Jg3Emvp6Tv4U6ymYYO50NUGpJ';
+
+		$(function () {
+
+			SC.initialize({
+				client_id: clientId
+			});
+
+			player = document.getElementById("SoundCloudPlayer");
+
+			checkQueryURLForTrackId();
+			loadTrackEnteredInInput();
+
+			$("form button").button();
+		});
+
+		function loadTrackEnteredInInput() {
+			loadTrack(getTrackId());
+		}
+
+		function loadTrack(trackId) {
+			SC.get('/tracks/' + trackId).then(function (track) {
+
+				// Inspect for info on track you want:
+				console.log(track);
+				mTrack = track;
+
+				renderTrack(track);
+				streamTrack(track);
+
+				waveForm = new WaveForm(track.waveform_url);
+
+			}, function () {
+				alert("Sorry no track found for track id: "+ trackId)
+			});
+		}
+
+		function renderTrack(track) {
+
+			$(player).find(".track_artist").text(track.user.permalink);
+			$(player).find(".track_title").text(track.title);
+			$(player).find(".track_artwork").attr('src', track.artwork_url);
+			$(player).find(".track_seek_bar").slider(
+				{
+					orientation: "horizontal",
+					range: "min",
+					max: track.duration,
+					value: 0,
+					change: seek
+				});
+
+		}
+
+		function streamTrack(track) {
+
+			var trackUrl = track.stream_url + "?client_id=" + clientId;
+
+			audio = new Audio(trackUrl);
+			console.log(trackUrl);
+
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				$(player).find(".track_pause").hide();
+				$(player).find(".track_play").fadeIn();
+			} else {
+				$(player).find(".track_play").fadeIn();
+			}
+			
+		}
+
+		function play() {
+			$(player).find(".track_play").hide();
+			$(player).find(".track_pause").fadeIn();
+			audio.play(); // play track 
+			seekBarInterval = setInterval(updateSeekBar, 500);
+		}
+
+		function pause() {
+			$(player).find(".track_pause").hide();
+			$(player).find(".track_play").fadeIn();
+			audio.pause();
+			clearInterval(seekBarInterval);
+		}
+
+		function seek(event) {
+
+			if (event.originalEvent) {
+				audio.currentTime = $(player).find(".track_seek_bar").slider("value") / 1000;
+			}
+			waveForm.setProgress((audio.currentTime * 1000) / mTrack.duration); 
+		}
+
+		function updateSeekBar() {
+
+			var time = (audio.currentTime * 1000);
+			$(player).find(".track_seek_bar").slider("value", time);
+		}
+
+		/**
+		 * Loads a different track id based on
+		 * url query
+		 */
+		function checkQueryURLForTrackId() {
+			var query = getUrlVars();
+			if (query.trackId) {
+				$('[name=trackId]').val(query.trackId);
+			}
+		}
+
+		//http://stackoverflow.com/questions/4656843/jquery-get-querystring-from-url
+		// Read a page's GET URL variables and return them as an associative array.
+		function getUrlVars()
+		{
+			var vars = {}, hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}
+
+		function getTrackId() {
+			return trackId = $('[name=trackId]').val();
+		}
+		
+	</script>
+</head>
+  <header>
+	<div>
+		<!-- top of page -->
+	</div>
+  </header>
+	<body>
+		<form method="get">
+			<div class="title">
+				<p>Track Selection</p>
+			</div>
+			<div class="trackselection">
+				<ul class="portertrackset">
+					<li><a style="text-decoration: underline;">Porter Bay</a></li>
+					<div id="firstitem">
+						<li><label for="trackId"></label><input name="trackId". type="text" value="299097136" /></li>
+					</div>
+			   </ul>
+			</div>
+			<br/><br/>
+		</form>
+
+		<section id="SoundCloudPlayer">
+			<img class="track_artwork" />
+			<p class="track_artist"></p>
+			<p class="track_title"></p>
+			<i class="material-icons track_play track_control" onClick="play()">play_circle_filled</i>
+			<i class="material-icons track_pause track_control" onClick="pause()">pause_circle_filled</i>
+			<br style="clear:both"/>
+			<div class="track_waveform"></div>
+			<div class="track_seek_bar" ></div>
+		</section>
+		
+		<form method="getVinci">
+			<br/><br/>
+			<div class="vincitrackselection">
+				<ul class="vincitrackset">
+					<li><a style="text-decoration: underline;">Vinci</a></li>
+					<div id="seconditem">
+						<li><label for="trackIdTwo"></label><input name="trackIdTwo". type="text" value="297984063" /></li>
+					</div>
+				</ul>
+			</div>
+			<br /><br/>
+		</form>
+		
+		<div class="bottombody">
+			<a style="font-family: 'Rock Salt', cursive;" class="chspkpics" id="chesapeakpics" onmouseover='yellowText(this)' onmouseout='aquaText(this)' href="/Flicks.html">See Pics</a>
+			<br/><br/>
+		</div>
+		<div class="footerholder">
+			<div class="footer">
+				<b> &copy; <a style="color: #278cc6;font-size:small;font-family: 'Indie Flower', cursive;" id="yearText" onmouseover='yellowText()' onmouseout='aquaText()'>year</a> - Chesapeak Music</b>
+			</div>
+		</div>
+		
+	</body>
+</html>

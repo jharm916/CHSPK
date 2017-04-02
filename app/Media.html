@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
+<head>
+	<title>Chesapeak</title>
+	<meta title ="Chesapeak Music Home Site">
+	<meta charset="UTF-8">
+	<meta name="description" content="Chesapeak Music East Coast Hip-Hop Community">
+	<meta name="keywords" content="Chesapeak,East,Coast,hiphop,hip,hop,music,PorterBay,porter,bay,rap,art">
+	<meta name="author" content="Jeremy Harman">
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Oswald|Indie+Flower|Rock+Salt" rel="stylesheet" type="text/css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+  <style>
+		html {
+			background: url("media/final_background.png") no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			height: 100%;
+			width: 100%;
+        }
+        body {
+			height: 100%;
+			width: 100%;
+			text-align:center;
+			font-size:medium;
+			color:white;
+        }
+		header {
+			text-align:center;
+			font-size:xx-large;
+			color:white;
+			font-family: 'Oswald';
+		 }
+        a {
+            color: #278cc6;
+            font-family: 'Indie Flower', cursive;
+            text-decoration: none; /* no underline */
+        }
+		.topbody {
+			left:0.5%;
+			width:99%;
+			height:20%;
+			background-color:black;
+		}
+		.leftbody {
+			float:left;
+			left:0.5%;
+			position:relative;
+			width:45%;
+			background-color: #278cc6;
+			height:25%;
+			overflow: scroll;
+			overflow-x: hidden;
+		}
+		.rightbody {
+			float:right;
+			left:-0.5%;
+			position:relative;
+			background-color: #278cc6;
+			overflow: scroll;
+			overflow-x: hidden;
+			width:45%;
+			height:25%;
+		}
+        .footerholder {
+            bottom: 0;
+            position: fixed;
+            text-align: center;
+            width: 100%;
+        }
+        .footer {
+            text-align:center;
+            bottom:0;
+            font-family: 'Indie Flower', cursive;
+            font-size:small;
+            color:white;
+        }
+	</style>
+	
+	<script>
+		var screenWidth = screen.width;
+		var screenHeight = screen.height;
+		var screenWidth_lesser = screenWidth;
+		var shirtWidth_one = 250;
+		var shirtHeight_one = 250;
+		var picHeight_two = 1100;
+		var music_width = screen.width * .75;
+		var music_height = screen.height / 2.2;
+		var logoWidth_one = screen.width * .70;
+		var logoHeight_one = screen.height / 2.5;
+		var social_image_size = 30;
+		var date = new Date();
+		var year = date.getFullYear();
+		
+		window.onload = function() {
+		   //when the document is finished loading, replace everything
+		   //between the <a ...> </a> tags with the value of splitText
+		   document.getElementById("yearText").innerHTML=year;
+		} 
+		
+		function yellowText(source) {
+			if (source.id == "chesapeakpics") {
+				document.getElementById("chesapeakpics").style.color = "white";
+				document.getElementById("yearText").style.color = "white";
+			}
+			if (source.id == "chesapeakbio") {
+				document.getElementById("chesapeakbio").style.color = "white";
+				document.getElementById("yearText").style.color = "white";
+			}
+		}
+		
+		function aquaText(source) {
+			if (source.id == "chesapeakpics") {
+				document.getElementById("chesapeakpics").style.color = "#278cc6";
+				document.getElementById("yearText").style.color = "#278cc6";
+			}
+			if (source.id == "chesapeakbio") {
+				document.getElementById("chesapeakbio").style.color = "#278cc6";
+				document.getElementById("yearText").style.color = "#278cc6";
+			}
+		}
+
+		function changeImage(image) {
+			image.src = "/media/chesapeak_logo.jpg";
+		}
+		
+		function changeBack(image) {
+			image.src = "/media/chesapeak_blacc.jpg";
+		}
+		
+	</script>
+	
+  </head>
+  <header>
+	<div>
+		<!-- top of page -->
+	</div>
+  </header>
+<body>
+	<div class="logo">
+		<!--
+		<img border="0" alt="CHSPK" src="media/sice.png" onload="this.width=screenWidth; this.height=screenHeight;" />
+		-->
+	</div>
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	
+	<div class="leftbody">
+		<div id="porterbaymusic" >
+		
+			<iframe id='PorterBayPalisades' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/299097136&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBayKeepCookin' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/297952817&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBayHOV' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/275198385&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBayPopular' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/275198379&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBaySetbacks' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/275198377&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBayDozinOff' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/275198374&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBayCrystalCity' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/275198369&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+			<iframe id='PorterBayAllYear' width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/275198364&amp;color=278cc6&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+
+			<audio controls="controls">
+				  <source src="media/trax/1. HOV LANDR Medium.mp3" type="audio/mp3" />
+				  <source src="media/saluteme LANDR Medium.mp3" type="audio/ogg" />
+				Your browser does not support the audio element.
+				</audio>
+		</div>
+	</div>
+    <div class="rightbody">
+		<a class="twitter-timeline" href="https://twitter.com/ChesapeakMusic">Tweets by ChesapeakMusic</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
+	
+  <!-- In production use: -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</body>
+
+  <div class="footerholder">
+    <div>
+	  <b>
+	    <a id="chesapeakpics" onmouseover='yellowText(this)' onmouseout='aquaText(this)' href="/Pics.html">Pics</a>
+		<!--
+		<a id="chesapeakbio" onmouseover='yellowText(this)' onmouseout='aquaText(this)' href="/Bios.html">Us</a>
+		-->
+	  </b>
+	</div>
+	<div class="footer">
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://twitter.com/ChesapeakMusic"> 
+				<img border="0" alt="Follow us on Twitter!" src="/media/Twitter_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+		
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://www.facebook.com/chesapeakmusic"> 
+				<img border="0" alt="Visit our Facebook Page!" src="/media/Facebook_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://soundcloud.com/porterbay"> 
+				<img border="0" alt="Listen to Porter Bay on SoundCloud!" src="/media/Soundcloud_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://www.youtube.com/channel/UCeJEOCKTF4BT5GYENaNDehA"> 
+				<img border="0" alt="Visit our Youtube Channel!" src="/media/Youtube_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://www.instagram.com/chspkbay410/"> 
+				<img border="0" alt="Follow us on Instagram!" src="/media/Instagram_logo.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+		<div>
+			<b> &copy; <a id="yearText" onmouseover='yellowText()' onmouseout='aquaText()'>year</a> - Chesapeak Music</b>
+		</div>
+		
+	</div>
+  </div>
+</div>
+
+</html>
+

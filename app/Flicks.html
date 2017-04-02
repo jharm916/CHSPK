@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+
+<head>
+	<title>Chesapeak</title>
+	<meta title ="Chesapeak Music Home Site">
+	<meta charset="UTF-8">
+	<meta name="description" content="Chesapeak Music Hip-Hop">
+	<meta name="keywords" content="Chesapeak,East,Coast,hiphop,hip,hop,music,PorterBay,porter,bay,rap,art">
+	<meta name="author" content="Jeremy Harman">
+	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Oswald|Indie+Flower|Rock+Salt|Bungee+Shade|Permanent+Marker" rel="stylesheet" type="text/css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+	<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+	<link rel="stylesheet" href="app.css">
+	<link rel=icon href="media/LOGO.webp">
+	<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="app.js"></script>
+	<script src="view1/view1.js"></script>
+	<script src="view2/view2.js"></script>
+	<script src="components/version/version.js"></script>
+	<script src="components/version/version-directive.js"></script>
+	<script src="components/version/interpolate-filter.js"></script>
+	<script src="jquery-3.1.1.min.js"></script>
+
+	  <style>
+			html {
+				background: url("media/final_background.png") no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				height: 100%;
+				width: 100%;
+			}
+			body {
+				width: 100%;
+				height: 100%;
+				background-attachment: fixed;
+				text-align:center;
+				font-size:medium;
+				color:white;
+			}
+			header {
+				text-align:center;
+				font-size:xx-large;
+				color:white;
+				font-family: 'Bungee Shade', cursive;
+			 }
+			a {
+				color: #278cc6;
+				text-decoration: none; /* no underline */
+			}
+			.footerholder {
+				bottom: 0;
+				position: fixed;
+				text-align: center;
+				width: 100%;
+				font-family: 'Indie Flower', cursive;
+			}
+			.leftmiddle {
+				bottom: 0;
+				position: fixed;
+				text-align: left;
+			    -webkit-transform: translateX(15%); 
+			      -ms-transform: translateX(15%);
+			       transform: translateX(15%);
+				width: 100%;
+				font-family: 'Indie Flower', cursive;
+			}
+			.footer {
+				text-align:center;
+				bottom:0;
+				font-family: 'Indie Flower', cursive;
+				font-size:small;
+				color:white;
+			}
+			.backbutton {
+				font-family: 'Bungee Shade', cursive;
+			}
+		</style>
+		
+		<script>
+			var screenWidth = screen.width;
+			var screenHeight = screen.height;
+			var screenWidth_lesser = screenWidth;
+			var shirtWidth_one = 250;
+			var shirtHeight_one = 250;
+			var picHeight_two = 1100;
+			var music_width = screen.width * .75;
+			var music_height = screen.height / 2.2;
+			var logoWidth_one = screen.width * .75;
+			var logoHeight_one = screen.height / 2.2;
+			var social_image_size = 30;
+			var pics_width = 304;
+			var pics_height = 202;
+			var date = new Date();
+			var year = date.getFullYear();
+			
+			window.onload = function() {
+			   //when the document is finished loading, replace everything between the <a ...> </a> tags with the value of splitText
+			   document.getElementById("yearText").innerHTML=year;
+			   makeRequest('pic.php');
+			}
+			
+			function makeRequest(_url) {
+				$.ajax({
+					type: "POST",
+					url: _url,
+					data: { directory: "media/gallery/" }
+				}).done(function(msg) { 
+					$result = JSON.parse(msg);
+					for (i = 0; i < $result.length; i++)
+					{
+						$(".inner").append($result[i] + "onmouseover='bigImg(this)' onmouseout='normalImg(this)' />");
+						$(".inner").append("<br/><br/>");
+					}
+				});
+				
+				/*.done(function( msg ) {
+					alert( "Data Saved: " + msg );
+					});    
+				});
+				*/
+				/*
+				httpRequest = new XMLHttpRequest();
+				if (!httpRequest) {
+					alert("failed, cannot create XmlHttp instance");
+					return false;
+				}
+
+				httpRequest.onreadystatechange = alertContents;
+				httpRequest.open('POST', url);
+				httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				httpRequest.send('userName=' + encodeURIComponent(userName));
+				*/
+			}
+
+			 function findHHandWW() {
+			   imgHeight = this.height;
+			   imgWidth = this.width;
+			   return true;
+			}
+
+			  function getImage(imgPath) {
+				var myImage = new Image();
+				myImage.name = imgPath;
+				myImage.onload = findHHandWW;
+				myImage.src = imgPath;
+				return myImage;
+			  }
+			  
+			function bigImg(x) {
+				//x.width = x.width * 1.2;
+				//x.height = x.height * 1.2;
+			}
+
+			function normalImg(x) {
+				//x.width = x.width / 1.2;
+				//x.height = x.height / 1.2;
+			}
+			
+			var folder = "/media/gallery/";
+ 			var fileextension = ".JPG";
+			/*
+			$(document).ready(function () {
+				var images = new Array();
+				var index = 0;
+				
+				$.ajax({
+					//This will retrieve the contents of the folder if the folder is configured as 'browsable'
+					url: folder,
+					success: function (data) {
+						$(data).find("a:contains(" + fileextension + ")").each(function () {
+							var filename = this.href.replace(window.location.host, "").replace("http://", "");
+							filename = folder + filename;
+							var image = getImage(filename);
+							var dispWidth = image.width * .02, dispHeight = image.height * .02;
+							var dimensionsText = "onload='this.width=" + dispWidth + "; this.height=" + dispHeight + ";'";
+							images[index] = "<img hspace='45' onmouseover='bigImg(this)' onmouseout='normalImg(this)' src='" + filename + "'" + dimensionsText + " name='asdf" + index + "'" + "/>";
+							index++;
+						});
+						for (i = 0; i < images.length; i++)
+						{
+							if (i % 5 == 0) {
+								$(".inner").append("<br/><br/>");
+							}
+							$( ".inner" ).append(images[i]);
+							//if (i == 0) {
+							//	$(".inner").append("<br/><br/>");
+							//}
+						}
+					}
+				});
+			});
+			*/
+			
+			function yellowText() {
+				document.getElementById("chesapeakback").style.color = "white";
+				document.getElementById("yearText").style.color = "white";
+			}
+			
+			function aquaText() {
+				document.getElementById("chesapeakback").style.color = "#278cc6";
+				document.getElementById("yearText").style.color = "#278cc6";
+			}
+			
+		</script>
+  </head>
+  <header>
+	<div>
+		<p>Flicks</p> 
+	</div>
+  </header>
+<body>
+	<div class="inner">
+	</div>
+	<div class="bottom">
+		
+	</div>
+</body>
+  <div class="footerholder">
+    <div>
+	  <b>
+		<div class="leftmiddle" />
+			<i>photos by SDP.4</i>
+			<a class="backbutton" id="chesapeakback" onmouseover='yellowText()' onmouseout='aquaText()' href="/Home.html">Back</a>
+		</div>
+	  </b>
+	</div>
+	<div class="footer">
+		<!--
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://twitter.com/ChesapeakMusic"> 
+				<img border="0" alt="Follow us on Twitter!" src="/media/Twitter_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+		
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://www.facebook.com/chesapeakmusic"> 
+				<img border="0" alt="Visit our Facebook Page!" src="/media/Facebook_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://soundcloud.com/porterbay"> 
+				<img border="0" alt="Listen to Porter Bay on SoundCloud!" src="/media/Soundcloud_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://www.youtube.com/channel/UCeJEOCKTF4BT5GYENaNDehA"> 
+				<img border="0" alt="Visit our Youtube Channel!" src="/media/Youtube_logo_black.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+
+		<div style="display:inline-block; margin: 0 auto;">
+			<a href="https://www.instagram.com/chspkbay410/"> 
+				<img border="0" alt="Follow us on Instagram!" src="/media/Instagram_logo.jpg" onload="this.width=social_image_size; this.height=social_image_size;" />
+			</a>
+		</div>
+		-->
+		<div>
+			<b> &copy; <a id="yearText" onmouseover='yellowText()' onmouseout='aquaText()'">year</a> - Chesapeak Music</b>
+		</div>
+	</div>
+  </div>
+</div> 
+</html>
+
